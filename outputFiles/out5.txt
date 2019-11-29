@@ -1,0 +1,16 @@
+Rule Evaluation
+bob(x) :- bob(x).
+bob(x) :- jim(x).
+  x='2'
+jim(x) :- bob(x).
+  x='1'
+bob(x) :- bob(x).
+bob(x) :- jim(x).
+jim(x) :- bob(x).
+
+Schemes populated after 2 passes through the Rules.
+
+Query Evaluation
+bob(x)? Yes(2)
+  x='1'
+  x='2'
