@@ -1,5 +1,28 @@
 #include "interpreter.h"
 
+void interpreter::dfsR(node* n) {
+	if (!n->isVisited()) {
+		n->hasBeenVisited();
+		for (auto t : n->getChildren()) {
+			dfsR(&reverseMap.at(t));
+		}
+		n->assignPost(postNum);
+		++postNum;
+	}
+}
+
+void interpreter::dfsP(node* n) {
+	if (!n->isVisited()) {
+		n->hasBeenVisited();
+		for (auto t : n->getChildren()) {
+                        dfsP(&dependencyMap.at(t));
+                }
+                sccIntVect.push_back(n->getNum());
+	}
+}
+
+
+
 relation interpreter::interpretQuerie(predicate* querie) {
 	//assumme success is true, this is for the printing of the queries
 	success = true;
@@ -65,11 +88,123 @@ void interpreter::executeInterpreter() {
 	int check;
 	int count = 0;
 
+//Dependency graph
+	//create a dependency graph = map from ints to nodes
+
+	// do a for loop through all my rules, in each rule, create a node for that rule
+	for (unsigned int i = 0; i < ruleVect.size(); ++i) {
+		node newNode;
+		newNode.setNum(i);
+		node newNode2;
+		newNode2.setNum(i);
+		dependencyMap.insert({i,newNode});
+		reverseMap.insert({i,newNode2});
+	}
+	// add it to the map
+
+	for (unsigned int i = 0; i < ruleVect.size(); ++i) {
+		rule* currentRule = ruleVect.at(i);
+		for (unsigned int j = 1; j < currentRule->getPredVect().size(); ++j) {
+			predicate* currentPred = currentRule->getPredVect().at(j);
+			for (unsigned int k = 0; k < ruleVect.size(); ++k) {
+				if (currentPred->getID() == ruleVect.at(k)->getPredVect().at(0)->getID()) {
+					//current rule depends on rulevect.at(k)
+					dependencyMap.at(i).addChild(k);
+				}
+			}
+		}
+
+	}
+	//for through each rule
+		//for each pred in the rule
+			//for each rule
+				//if it's the name of the head in any rule
+					//add that head's number to our node's child set
+
+	for (unsigned int i = 0; i < ruleVect.size(); ++i) {
+		cout << "R" << i << ": ";
+		node myNode = dependencyMap.at(i);
+		for (auto j : myNode.getChildren()) {
+			cout << "R" << j << " ";
+		}
+		cout << endl;
+	}
+	//for each thing in map (i could use a for loop with the rule vect size)
+		//print out the name, then the whole set of children
+
+
+//reverse dependency graph
+	//create a new map of ints to nodes for the reverse
+	//iterate through old map, using j
+	for (unsigned int i = 0; i < ruleVect.size(); ++i) {
+		node myNode = dependencyMap.at(i);
+		for (auto j : myNode.getChildren()) {
+			reverseMap.at(j).addChild(i);
+		}
+	}
+
+	/* CHECK FOR REVERSE DEPENDENCY GRAPH
+	for (unsigned int i = 0; i < ruleVect.size(); ++i) {
+                cout << "R" << i << ": ";
+                node myNode = reverseMap.at(i);
+                for (auto j : myNode.getChildren()) {
+                        cout << "R" << j << " ";
+                }
+                cout << endl;
+        }*/
+
+		//if i have a child, then go to that node in reverse graph and rule j as child
+
+
+
+
+//dfs forrest of reverse dependency graph
+	//jsut go through and assign post order numbers
+
+	for (unsigned int i = 0; i < ruleVect.size(); ++i) {
+		//call dfsR search on all nodes in reverseMap
+		dfsR(&reverseMap.at(i));
+	}
+	cout << "done";
+//finding scc
+	//starting at hightest post order number fround from dfs forrest,
+	//go through recursively in that depencdey graph to grab a scc,
+/*
+	vector<int> findingScc(ruleVect.size());
+	for (unsigned int i = 0; i < ruleVect.size(); ++i) {
+		findingScc.at(ruleVect.size() - dependencyMap.at(i).getPost()) = i;
+	}
+
+	for (unsigned int i = 0; i < ruleVect.size(); ++i) {
+		dfsP(dependencyMap.at(findingScc.at(i)));
+		if (sccIntVect.size() != 0) {
+			sccVect.push_back(sccIntVect);
+			sccIntVect.clear();
+		}
+	}
+*/
+
+
+
+
+
+
+
+
+
+//run the do while for each scc data structure
 
 
 	cout << "Rule Evaluation\n";
 	//This is the meat of project 4
 	//For each rule in the rule vector
+
+
+
+
+	// for each scc, do while unless its a single noded scc that does not depend on itself
+		//then run just once and be done
+
 	do {
 		//reset the check
 		check = 0;
@@ -135,7 +270,7 @@ void interpreter::executeInterpreter() {
                         cout << " Yes(" << interpretQuerie(querieVect.at(i)).getTuple().size() << ")\n";
                 }
                 else {
-                	if (success) {
+			if (success) {
 				cout << " Yes(1)\n";
 			}
 			else {

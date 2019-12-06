@@ -12,6 +12,7 @@
 #include "predicate.h"
 #include "relation.h"
 #include "rule.h"
+#include "node.h"
 
 using namespace std;
 
@@ -19,6 +20,9 @@ class interpreter
 {
 public:
 	interpreter(void){};
+
+	void dfsR(node* n);
+	void dfsP(node* n);
 
 	//for Queries
 	void executeInterpreter();
@@ -53,7 +57,14 @@ private:
 
 	database relationMap;
 
+	map<int, node> dependencyMap;
+	map<int, node> reverseMap;
+
 	bool success;
+	int postNum = 0;
+
+	vector<int> sccIntVect;
+	vector<vector<int>> sccVect;
 };
 
 #endif //interpreter_h

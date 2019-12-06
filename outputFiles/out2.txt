@@ -1,15 +1,2 @@
-Rule Evaluation
-bob(x) :- jim(x).
-  x='2'
-bob(x) :- joe(x).
-  x='4'
-bob(x) :- jim(x).
-bob(x) :- joe(x).
-
-Schemes populated after 2 passes through the Rules.
-
-Query Evaluation
-bob(x)? Yes(3)
-  x='1'
-  x='2'
-  x='4'
+R0: 
+R1: 
