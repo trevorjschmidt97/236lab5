@@ -228,7 +228,7 @@ void interpreter::executeInterpreter() {
                                 //Now create a new relation starting in the actual part of that rule
                                 relation newRelation = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(1));
                                 //This will join all the meat of that rule together
-                                for (unsigned int k = 2; k < ruleVect.at(i)->getPredVect().size(); ++k) {
+                                for (unsigned int k = 2; k < ruleVect.at(currentScc.at(j))->getPredVect().size(); ++k) {
                                    	newRelation = newRelation.join(interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k)));
                                 }
 
@@ -272,7 +272,7 @@ void interpreter::executeInterpreter() {
                         else {
                                 cout << "R" << currentScc.at(0) << endl;
                         }
-		}
+		} //end single scc with no dependencies
 
 		//else we must repeat the evaluation of the rules until the evaluation reaches a fixed point
 		else {
@@ -302,13 +302,14 @@ void interpreter::executeInterpreter() {
                 		for (unsigned int j = 0; j < currentScc.size(); ++j) {
                         		//First print out the rule
 					cout << ruleVect.at(currentScc.at(j))->toString();
-                        		//cout << ruleVect.at(i)->toString();
                         		//Now create a new relation starting in the actual part of that rule
                         		relation newRelation = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(1));
                         		//This will join all the meat of that rule together
-                        		for (unsigned int k = 2; k < ruleVect.at(i)->getPredVect().size(); ++k) {
+                        		//cout << "MADE IT THIS FAR!!!!!" << endl;
+					for (unsigned int k = 2; k < ruleVect.at(currentScc.at(j))->getPredVect().size(); ++k) {
                                 		newRelation = newRelation.join(interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k)));
                         		}
+					//cout << "check here too" << endl;
 
                         		map<string, int> seenVariables;
 
@@ -316,7 +317,7 @@ void interpreter::executeInterpreter() {
                         		for (unsigned int k = 0; k < simpleName.size(); ++k) {
                                 		for (unsigned int l = 0; l < newRelation.getAttribute().size(); ++l) {
                                         		if (simpleName.at(k) == newRelation.getAttribute().at(l)) {
-                                                		seenVariables[simpleName.at(k)] = l;
+                                       	        		seenVariables[simpleName.at(k)] = l;
                                         		}
                                 		}
                         		}
