@@ -1,6 +1,7 @@
 #ifndef interpreter_h
 #define interpreter_h
 
+#include <bits/stdc++.h>
 #include <stdio.h>
 #include <string.h>
 #include <string>

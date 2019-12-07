@@ -4,13 +4,16 @@ R1:R2
 R2:R0,R1
 
 Rule Evaluation
-SCC: R2,R1,R0
-jim(x) :- bob(x).
-  x='1'
+SCC: R0,R1,R2
+bob(x) :- bob(x).
 bob(x) :- jim(x).
   x='2'
+jim(x) :- bob(x).
+  x='1'
 bob(x) :- bob(x).
-1 passes: R
+bob(x) :- jim(x).
+jim(x) :- bob(x).
+2 passes: R0,R1,R2
 
 Query Evaluation
 bob(x)? Yes(2)
