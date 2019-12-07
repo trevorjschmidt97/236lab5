@@ -1,9 +1,11 @@
+Dependency Graph
+R0:
+
 Rule Evaluation
+SCC: R0
 jim(x) :- bob(x).
   x='1'
-jim(x) :- bob(x).
-
-Schemes populated after 2 passes through the Rules.
+1 passes: R
 
 Query Evaluation
 bob(x)? Yes(1)

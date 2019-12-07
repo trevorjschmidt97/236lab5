@@ -1,6 +1,6 @@
-Rule Evaluation
+Dependency Graph
 
-Schemes populated after 1 passes through the Rules.
+Rule Evaluation
 
 Query Evaluation
 bob(x)? Yes(1)

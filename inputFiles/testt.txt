@@ -1,0 +1,20 @@
+Queries:
+A(X,Y)
+B(X,Y)
+C(X,Y)
+D(X,Y)
+E(X,Y)
+F(X,Y)
+G(X,Y)
+
+Facts:
+
+Rules:
+A(X,Y) :- B(X,Y), C(X,Y).
+B(X,Y) :- A(X,Y), D(X,Y).
+B(X,Y) :- B(Y,X).
+E(X,Y) :- F(X,Y), G(X,Y).
+E(X,Y) :- E(X,Y), F(X,Y).
+
+Queries:
+
