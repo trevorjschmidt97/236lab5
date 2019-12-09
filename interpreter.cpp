@@ -80,7 +80,8 @@ void interpreter::executeInterpreter() {
 
 	//Adds all tuples from facts to each relation
     	for (unsigned int i = 0; i < factVect.size(); ++i) {
-           	relationMap[factVect.at(i)->getID()].addTuple(factVect.at(i)->getParameterList());
+		vector<string> poop = factVect.at(i)->getParameterList();
+           	relationMap[factVect.at(i)->getID()].addTuple(poop);
      	}
 
 	int check;
@@ -212,7 +213,6 @@ void interpreter::executeInterpreter() {
 		if((currentScc.size() == 1) && (dependencyMap.at(currentScc.at(0)).getChildren().count(currentScc.at(0)) == 0) ) {
 			// Then the rule is evaluated only once
 
-			//cout << "itttttttttttttttttttt doesnt depend on itself!!!!" << endl;
 			count = 0;
 
 			cout << "SCC: R" << currentScc.at(0) << endl;
@@ -229,7 +229,8 @@ void interpreter::executeInterpreter() {
                                 relation newRelation = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(1));
                                 //This will join all the meat of that rule together
                                 for (unsigned int k = 2; k < ruleVect.at(currentScc.at(j))->getPredVect().size(); ++k) {
-                                   	newRelation = newRelation.join(interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k)));
+					relation crap = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k));
+                                   	newRelation = newRelation.join(crap);
                                 }
 
                                 map<string, int> seenVariables;
@@ -305,9 +306,9 @@ void interpreter::executeInterpreter() {
                         		//Now create a new relation starting in the actual part of that rule
                         		relation newRelation = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(1));
                         		//This will join all the meat of that rule together
-                        		//cout << "MADE IT THIS FAR!!!!!" << endl;
 					for (unsigned int k = 2; k < ruleVect.at(currentScc.at(j))->getPredVect().size(); ++k) {
-                                		newRelation = newRelation.join(interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k)));
+                                		relation crap = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k));
+						newRelation = newRelation.join(crap);
                         		}
 					//cout << "check here too" << endl;
 

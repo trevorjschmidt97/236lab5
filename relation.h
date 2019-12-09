@@ -38,15 +38,15 @@ public:
 
 	void select2(int index, int index2);
 
-	void project(map<string, int> mapp, vector<string> stringVector);
+	void project(map<string, int>& mapp, vector<string>& stringVector);
 
-	void addTuple(vector<string> inputVector);
+	void addTuple(vector<string>& inputVector);
 
 	void toString();
 
-	relation join(relation input);
+	relation join(relation& input);
 
-	relation unionize(relation input);
+	relation unionize(relation& input);
 	//Add join
 	//Add union
 

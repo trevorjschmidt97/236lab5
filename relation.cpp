@@ -1,6 +1,6 @@
 #include "relation.h"
 
-relation relation::join(relation input) {
+relation relation::join(relation& input) {
 
 	set<pair<int, int>> columnMatch;
 	vector<int> notMatch;
@@ -46,7 +46,7 @@ relation relation::join(relation input) {
 	return newRelation;
 }
 
-relation relation::unionize(relation input) {
+relation relation::unionize(relation& input) {
 	bool added;
 	relation newRelation;
 	newRelation.setName(name);
@@ -127,7 +127,7 @@ void relation::select2(int index, int index2) {
 	tupleSet = newTupleSet;
 }
 
-void relation::project(map<string, int> mapp, vector<string> stringVector) {
+void relation::project(map<string, int>& mapp, vector<string>& stringVector) {
   	set<Tuple> newTupleSet;
 
     	for (auto t : tupleSet) {
@@ -142,7 +142,7 @@ void relation::project(map<string, int> mapp, vector<string> stringVector) {
      	tupleSet = newTupleSet;
 }
 
-void relation::addTuple(vector<string> inputVector) {
+void relation::addTuple(vector<string>& inputVector) {
    	Tuple t;
 
      	for (unsigned int i = 0; i < inputVector.size(); ++i) {
