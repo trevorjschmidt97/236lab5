@@ -46,7 +46,18 @@ relation relation::join(relation& input) {
 	return newRelation;
 }
 
-relation relation::unionize(relation& input) {
+void relation::unionize(relation& input) {
+	for (auto t : input.getTuple()) {
+		if (tupleSet.insert(t).second){
+			cout << "  ";
+                        cout << attributeNames.at(0) << "=" << t.at(0);
+                        for (unsigned int j = 1; j < input.getAttribute().size(); ++j) {
+                                cout << ", " << attributeNames.at(j) << "=" << t.at(j);
+                        }
+                        cout << endl;
+		}
+	}
+	/*
 	bool added;
 	relation newRelation;
 	newRelation.setName(name);
@@ -56,7 +67,7 @@ relation relation::unionize(relation& input) {
 	}
 	for (auto t : input.getTuple()) {
 		added = true;
-		/*Tuple j;
+		Tuple j;
 
         	for (unsigned int i = 0; i < t.size(); ++i) {
                 	j.push_back(t.at(i));
@@ -68,7 +79,6 @@ relation relation::unionize(relation& input) {
         	if(ret.second==false) {
 			added = false;
 		}
-		*/
 		unsigned int size = newRelation.getTuple().size();
 
 		newRelation.addTuple(t);
@@ -86,6 +96,7 @@ relation relation::unionize(relation& input) {
 		}
 	}
 	return newRelation;
+}*/
 }
 /*
 void relation::toString() {

@@ -46,10 +46,7 @@ public:
 
 	relation join(relation& input);
 
-	relation unionize(relation& input);
-	//Add join
-	//Add union
-
+	void unionize(relation& input);
 
 private:
 	string name;

@@ -31,7 +31,6 @@ public:
 		tokenVect = vect;
    	}
 
-
 	vector <predicate*> getSchemeVect() {
 		return schemeVect;
 	}

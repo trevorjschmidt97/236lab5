@@ -251,14 +251,14 @@ void interpreter::executeInterpreter() {
                                 relation poop = relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID());
 
 				//relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()) = relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect()$
-				relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()).unionize(newRelation);
-				//relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()) = relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()).unionize(newRelation);
+
+				relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()) = relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()).unionize(newRelation);
 
                                 if (poop.getTuple() != relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()).getTuple() ) {
                                    	++check;
                                 }
                    	} //end for loop of each scc
-                        ++count;
+`                        ++count;
 
 			cout << count << " passes: ";
 
@@ -328,8 +328,8 @@ void interpreter::executeInterpreter() {
                         		//if there is a difference, change my check, and print out those different tuples
 
                         		relation poop = relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID());
-					relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()).unionize(newRelation);
-					//relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()) = relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()).unionize(newRelation);
+
+					relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()) = relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()).unionize(newRelation);
 
                         		if (poop.getTuple() != relationMap.at(ruleVect.at(currentScc.at(j))->getPredVect().at(0)->getID()).getTuple() ) {
                                 		++check;
