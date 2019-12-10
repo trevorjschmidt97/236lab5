@@ -114,6 +114,3 @@ Students('CS101',R,N,G)? Yes(3)
   R='Turing Aud.', N='C. Brown', G='A'
   R='Turing Aud.', N='L. Van Pelt', G='B'
   R='Turing Aud.', N='Snoopy', G='A-'
-End of file
-
-

@@ -19,6 +19,3 @@ Query Evaluation
 bob(x)? Yes(2)
   x='1'
   x='2'
-End of file
-
-

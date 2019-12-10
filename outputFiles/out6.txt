@@ -49,6 +49,3 @@ j(x) :- i(x).
 
 Query Evaluation
 j('a')? Yes(1)
-End of file
-
-
