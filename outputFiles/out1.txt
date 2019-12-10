@@ -25,3 +25,6 @@ Ancestor(x,'ned')? Yes(2)
   x='bob'
   x='jim'
 Sibling('ned','sue')? Yes(1)
+End of file
+
+

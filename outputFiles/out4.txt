@@ -10,3 +10,6 @@ jim(x) :- bob(x).
 Query Evaluation
 bob(x)? Yes(1)
   x='1'
+End of file
+
+

@@ -8,6 +8,7 @@ relation relation::join(relation& input) {
 	relation newRelation;
 	newRelation.setName("Joined Predicate");
 	vector<string> newAttributeStringVect = attributeNames;
+	//cout << "before for loop of join\n";
 	for (unsigned int i = 0; i < input.getAttribute().size(); ++i) {
 		bool isIn = false;
 		for (unsigned int j = 0; j < attributeNames.size(); ++j) {
@@ -23,8 +24,9 @@ relation relation::join(relation& input) {
 			notMatch.push_back(i);
 		}
 	}
+	//cout << "after for loop of join\n";
 	newRelation.setAttribute(newAttributeStringVect);
-
+	//cout << "before tuple loop of join\n";
 	for (auto t : tupleSet) {
 		for (auto r : input.getTuple()) {
 			bool theyMatch = true;
@@ -43,6 +45,7 @@ relation relation::join(relation& input) {
 			}
 		}
 	}
+	//cout << "after tuple loop\n";
 	return newRelation;
 }
 
@@ -57,7 +60,7 @@ void relation::unionize(relation& input) {
                         cout << endl;
 		}
 	}
-	/*
+	/* // Old union function, later optimized above
 	bool added;
 	relation newRelation;
 	newRelation.setName(name);
@@ -98,21 +101,6 @@ void relation::unionize(relation& input) {
 	return newRelation;
 }*/
 }
-/*
-void relation::toString() {
-        if (tupleSet.size() != 0) {
-                for (auto t : tupleSet) {
-                        cout << "  ";
-                        cout << attributeNames.at(0) << "=" << t.at(0);
-                        for (unsigned int j = 1; j < attributeNames.size(); ++j) {
-                                cout << ", " << attributeNames.at(j) << "=" << t.at(j);
-                        }
-                        cout << endl;
-                }
-        }
-}
-*/
-
 
 void relation::select1(int index, string input) {
 	set<Tuple> newTupleSet;

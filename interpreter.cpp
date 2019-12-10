@@ -228,6 +228,7 @@ void interpreter::executeInterpreter() {
                                 relation newRelation = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(1));
                                 //This will join all the meat of that rule together
                                 for (unsigned int k = 2; k < ruleVect.at(currentScc.at(j))->getPredVect().size(); ++k) {
+//
 					relation crap = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k));
                                    	newRelation = newRelation.join(crap);
                                 }
@@ -302,13 +303,19 @@ void interpreter::executeInterpreter() {
                 		for (unsigned int j = 0; j < currentScc.size(); ++j) {
                         		//First print out the rule
 					cout << ruleVect.at(currentScc.at(j))->toString();
+					//cout << "poop\n";
                         		//Now create a new relation starting in the actual part of that rule
                         		relation newRelation = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(1));
                         		//This will join all the meat of that rule together
+//					cout << ruleVect.at(currentScc.at(j))->getPredVect().size() << endl;
 					for (unsigned int k = 2; k < ruleVect.at(currentScc.at(j))->getPredVect().size(); ++k) {
-                                		relation crap = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k));
-						newRelation = newRelation.join(crap);
-                        		}
+//						cout << "check before join\n";
+//						if (k > 1) {
+							relation crap = interpretQuerie(ruleVect.at(currentScc.at(j))->getPredVect().at(k));
+							newRelation = newRelation.join(crap);
+//                        			}
+//						cout << "check after join\n";
+					}
 					//cout << "check here too" << endl;
 
                         		map<string, int> seenVariables;
@@ -378,4 +385,5 @@ void interpreter::executeInterpreter() {
 		//print out the new relation
 		interpretQuerie(querieVect.at(i)).toString();
 	} //end query eval
+	//cout << "End of file\n\n\n";
 }//end execute interpreter
