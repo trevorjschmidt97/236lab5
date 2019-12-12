@@ -6,6 +6,7 @@
 //  Copyright © 2019 Trevor Schmidt. All rights reserved.
 //
 
+//#include <chrono>
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,8 +15,12 @@
 #include "interpreter.h"
 
 using namespace std;
+//using namespace std::chrono;
 
 int main(int argc, const char * argv[]) {
+
+	//auto start = high_resolution_clock::now();
+
 	//Create string in which to read the file
     	string input;
 
@@ -28,10 +33,10 @@ int main(int argc, const char * argv[]) {
 
     	//Passes the entire file to the scanner LAB 1
     	scanner lexer(input);
-      //Creates a vector of tokens
+      	//Creates a vector of tokens
     	lexer.executeLexer();
 
-	     //Uses the tokens to create a datalog program LAB 2
+	//Uses the tokens to create a datalog program LAB 2
 	dataLog parser;
 	parser.setVect(lexer.getVect());
 	parser.executeDataLog();
@@ -51,6 +56,11 @@ int main(int argc, const char * argv[]) {
 	//lexer.toString();
 
     	lexer.deleteVector();
+
+	//auto stop = high_resolution_clock::now();
+	//auto duration = duration_cast<seconds>(stop - start);
+	//cout << "Time taken by program: " << duration.count() << " seconds" << endl;
+	//cout << "Or " << duration.count()/60 << " minutes" << endl;
 
 	return 0;
 }
